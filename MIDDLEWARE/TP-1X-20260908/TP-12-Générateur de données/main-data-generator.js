@@ -81,27 +81,29 @@ app.post('/json', (req, res) => {
                 case 'Start':
                     //Ecrire/Compléter cette section
                     clearInterval(timerDataGenerator)
-                    x1 = funcDataGenerator()
-                    x1 = Math.round(x1 * 10) / 10
-                    x2 = new Date()
-                    x3 = dateformat('yyyy-MM-dd hh:mm:ss.SSS', x2)
+                    // Lancement de l'intervalle avec les parametres suivant : jsonSetting['DataGeneration']['Interval'])
+                    timerDataGenerator = setInterval( () => {
+                        x1 = funcDataGenerator()
+                        x1 = Math.round(x1 * 10) / 10
+                        x2 = new Date()
+                        x3 = dateformat('yyyy-MM-dd hh:mm:ss.SSS', x2)
 
-                    arrRandomNumbers.push(
-                        {
+                        arrRandomNumbers.push({
                             'TimeStampRaw': x2,
                             'TimeStampFormatted': x3,
                             'DataValue': x1
-                        }
-                    )
-
+                        })
+                    }, jsonSetting['DataGeneration']['Interval'])
                     break
 
                 case 'Stop':
                     //Écrire cette section
+                    clearInterval(timerDataGenerator) // Arrete la generation en cours 
                     break
 
                 case 'DeleteAllData':
                     //Écrire cette section
+                    arrRandomNumbers.length = 0 // Remet le tableau arrRandomNumbers a zéro
                     break
 
                 case 'Fetch-Data':
