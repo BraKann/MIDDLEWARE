@@ -1,0 +1,21 @@
+# XXXXXX/YYYYYY is your username/password in https://hub.docker.com/
+# kubectl create -f k8-sds-pod-pod.yaml
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: daniel-sds-pod3
+  labels:
+    app: daniel-sds-pod3
+spec:
+  containers:
+    - name: daniel-sds-pod3
+      image: XXXXXX/simple-roll-dice-service:v1
+      resources:
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+      ports:
+        - name: nodejs-port
+          containerPort: 3000
+          protocol: TCP

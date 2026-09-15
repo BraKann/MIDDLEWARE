@@ -1,0 +1,15 @@
+# XXXXXX/YYYYYY is your username/password in https://hub.docker.com/
+# kubectl create -f k8-sds-pod-ser.yaml
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: daniel-sds-ser3
+spec:
+  type: NodePort
+  selector:
+    app: daniel-sds-pod3
+  ports:
+    - port: 3000
+      targetPort: nodejs-port
+      protocol: TCP
